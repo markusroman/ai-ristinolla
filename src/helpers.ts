@@ -27,7 +27,7 @@ export const checkFull = (board: (null | string)[]) => {
   return true;
 };
 
-export const findWinningIndex = (board: (null | string)[]) => {
+export const findWinningIndex = (board: (null | string)[], mark: string) => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -38,6 +38,8 @@ export const findWinningIndex = (board: (null | string)[]) => {
     [0, 4, 8],
     [2, 4, 6],
   ];
+
+  let chances: number[] = [];
 
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
@@ -53,22 +55,43 @@ export const findWinningIndex = (board: (null | string)[]) => {
     }
 
     if (board[a] === board[b] && !board[c]) {
-      return c;
+      if (board[a] === mark) {
+        return c;
+      } else {
+        chances.push(c);
+      }
     } else if (board[a] === board[c] && !board[b]) {
-      return b;
+      if (board[a] === mark) {
+        return b;
+      } else {
+        chances.push(b);
+      }
     } else if (board[b] === board[c] && !board[a]) {
-      return a;
+      if (board[b] === mark) {
+        return a;
+      } else {
+        chances.push(a);
+      }
     }
   }
 
-  return null;
+  return chances[0] ?? null;
 };
 
-export const calculateNextMove = (board: (null | string)[]) => {
-  let index: number = findWinningIndex(board) ?? 4;
-
+export const calculateNextMove = (
+  board: (null | string)[],
+  is_players_turn: boolean
+) => {
   if (checkFull(board)) {
-    return index;
+    return 0;
+  }
+
+  let mark = is_players_turn ? 'X' : 'O';
+  let winning_index = findWinningIndex(board, mark);
+  let index: number = winning_index ?? 8;
+
+  if (!winning_index && !board[4]) {
+    index = 4;
   }
 
   while (board[index]) {

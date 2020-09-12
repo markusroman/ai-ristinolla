@@ -45,7 +45,7 @@ const useBoard = () => {
 
   useEffect(() => {
     if (!is_players_turn) {
-      const to_click = calculateNextMove(gameboard);
+      const to_click = calculateNextMove(gameboard, is_players_turn);
       updateBoard(to_click);
     }
   }, [is_players_turn, gameboard, updateBoard]);
