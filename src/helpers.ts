@@ -65,7 +65,7 @@ export const findWinningIndex = (board: (null | string)[]) => {
 };
 
 export const calculateNextMove = (board: (null | string)[]) => {
-  let index: number = findWinningIndex(board) ?? 8;
+  let index: number = findWinningIndex(board) ?? 4;
 
   if (checkFull(board)) {
     return index;
