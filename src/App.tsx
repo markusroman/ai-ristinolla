@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import { useRecoilValue } from 'recoil';
+
+import Game from './components/Game';
+import NewGame from './components/NewGame';
+import TurnLabel from './components/TurnLabel';
+import { isGameWon } from './store';
+import useBoard from './hooks/useBoard';
+
 import './App.css';
 
-function App() {
+interface Props {}
+
+const App: React.FC<Props> = () => {
+  const is_game_won = useRecoilValue(isGameWon);
+  const { resetGame, updateBoard } = useBoard();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Game updateBoard={updateBoard} />
+      {is_game_won ? <NewGame resetGame={resetGame} /> : <TurnLabel />}
     </div>
   );
-}
+};
 
 export default App;
