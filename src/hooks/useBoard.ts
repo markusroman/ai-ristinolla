@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useResetRecoilState } from 'recoil';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { calculateNextMove, checkFull, checkWin } from '../helpers';
+import { calculateNextMove } from '../helpers';
 import { board, isPlayersTurn, isGameWon } from '../store';
 import { isBoardFull } from '../store/selectors';
 
@@ -30,11 +30,7 @@ const useBoard = () => {
       return new_state;
     });
 
-    if (checkWin(new_state) || checkFull(new_state)) {
-      return null;
-    } else {
-      setIsPlayersTurn((value) => !value);
-    }
+    setIsPlayersTurn((value) => !value);
   };
 
   useEffect(() => {
