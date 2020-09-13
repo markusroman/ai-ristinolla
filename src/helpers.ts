@@ -99,14 +99,38 @@ export const findDoubleWinThreat = (
   else if (board[7] && board[7] === board[0] && !board[6]) return 6;
   else if (board[7] && board[7] === board[2] && !board[8]) return 8;
   // Vastakkaiset nurkat
+  else if (
+    board[2] &&
+    board[4] &&
+    board[6] &&
+    board[2] === board[6] &&
+    board[2] !== board[4] &&
+    !board[0] &&
+    !board[8] &&
+    !board[5] &&
+    !board[3] &&
+    !board[1] &&
+    !board[7]
+  )
+    return 5;
+  else if (
+    board[0] &&
+    board[4] &&
+    board[8] &&
+    board[0] === board[8] &&
+    board[0] !== board[4] &&
+    !board[2] &&
+    !board[6] &&
+    !board[5] &&
+    !board[3] &&
+    !board[1] &&
+    !board[7]
+  )
+    return 5;
   else if (board[0] && board[0] === board[8] && !board[6] && !board[2])
     return 2;
   else if (board[2] && board[2] === board[6] && !board[0] && !board[8])
     return 8;
-  else if (board[0] && !board[2] && !board[6] && !board[8]) return 8;
-  else if (!board[0] && board[2] && !board[6] && !board[8]) return 6;
-  else if (!board[0] && !board[2] && board[6] && !board[8]) return 2;
-  else if (!board[0] && !board[2] && !board[6] && board[8]) return 0;
   // Ei vaaraa
   else return null;
 };
@@ -119,25 +143,24 @@ export const calculateNextMove = async (
     return 0;
   }
 
+  if (!board[4]) {
+    return 4;
+  }
+
   let mark = is_players_turn ? 'X' : 'O';
 
   let winning_index = await findWinningIndex(board, mark);
-  if (winning_index) return winning_index;
-
   let double_threat_index = await findDoubleWinThreat(board);
-  if (double_threat_index) return double_threat_index;
 
-  if (
+  if (winning_index) return winning_index;
+  else if (double_threat_index) return double_threat_index;
+  else if (
     !winning_index &&
     winning_index !== 0 &&
     !double_threat_index &&
     double_threat_index !== 0
   ) {
-    let index: number = 8;
-
-    if (!board[4]) {
-      index = 4;
-    }
+    let index: number = 4;
 
     while (board[index]) {
       index = Math.floor(Math.random() * 9);
