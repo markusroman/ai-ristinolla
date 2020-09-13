@@ -78,7 +78,28 @@ export const findWinningIndex = (board: (null | string)[], mark: string) => {
   return chances[0] ?? null;
 };
 
-export const calculateNextMove = (
+export const findDoubleWinThreat = (
+  board: (null | string)[]
+): number | null => {
+  // Nurkat
+  if (board[1] && board[1] === board[3] && !board[0]) return 0;
+  else if (board[1] && board[1] === board[5] && !board[2]) return 2;
+  else if (board[3] && board[3] === board[7] && !board[6]) return 6;
+  else if (board[5] && board[5] === board[7] && !board[8]) return 8;
+  // L-muodot
+  else if (board[1] && board[1] === board[6] && !board[0]) return 0;
+  else if (board[1] && board[1] === board[8] && !board[2]) return 2;
+  else if (board[3] && board[3] === board[2] && !board[0]) return 0;
+  else if (board[3] && board[3] === board[8] && !board[6]) return 6;
+  else if (board[5] && board[5] === board[0] && !board[2]) return 2;
+  else if (board[5] && board[5] === board[6] && !board[8]) return 8;
+  else if (board[7] && board[7] === board[0] && !board[6]) return 6;
+  else if (board[7] && board[7] === board[2] && !board[8]) return 8;
+  // Ei vaaraa
+  else return null;
+};
+
+export const calculateNextMove = async (
   board: (null | string)[],
   is_players_turn: boolean
 ) => {
@@ -87,16 +108,23 @@ export const calculateNextMove = (
   }
 
   let mark = is_players_turn ? 'X' : 'O';
-  let winning_index = findWinningIndex(board, mark);
-  let index: number = winning_index ?? 8;
 
-  if (!winning_index && !board[4]) {
-    index = 4;
+  let winning_index = await findWinningIndex(board, mark);
+  let double_threat_index = await findDoubleWinThreat(board);
+
+  if (winning_index) return winning_index;
+  else if (double_threat_index) return double_threat_index;
+  else {
+    let index: number = winning_index ?? double_threat_index ?? 8;
+
+    if (!board[4]) {
+      index = 4;
+    }
+
+    while (board[index]) {
+      index = Math.floor(Math.random() * 9);
+    }
+
+    return index;
   }
-
-  while (board[index]) {
-    index = Math.floor(Math.random() * 9);
-  }
-
-  return index;
 };
