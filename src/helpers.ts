@@ -172,7 +172,8 @@ export const calculateNextMove = async (
   let double_threat_index = await findDoubleWinThreat(board);
 
   if (winning_index) return winning_index;
-  else if (double_threat_index) return double_threat_index;
+  else if (double_threat_index && !winning_index && winning_index !== 0)
+    return double_threat_index;
   else if (
     !winning_index &&
     winning_index !== 0 &&
