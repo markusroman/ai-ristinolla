@@ -27,7 +27,10 @@ export const checkFull = (board: (null | string)[]) => {
   return true;
 };
 
-export const findWinningIndex = (board: (null | string)[], mark: string) => {
+export const findWinningIndex = (
+  board: (null | string)[],
+  mark: string
+): number | null => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -95,6 +98,15 @@ export const findDoubleWinThreat = (
   else if (board[5] && board[5] === board[6] && !board[8]) return 8;
   else if (board[7] && board[7] === board[0] && !board[6]) return 6;
   else if (board[7] && board[7] === board[2] && !board[8]) return 8;
+  // Vastakkaiset nurkat
+  else if (board[0] && board[0] === board[8] && !board[6] && !board[2])
+    return 2;
+  else if (board[2] && board[2] === board[6] && !board[0] && !board[8])
+    return 8;
+  else if (board[0] && !board[2] && !board[6] && !board[8]) return 8;
+  else if (!board[0] && board[2] && !board[6] && !board[8]) return 6;
+  else if (!board[0] && !board[2] && board[6] && !board[8]) return 2;
+  else if (!board[0] && !board[2] && !board[6] && board[8]) return 0;
   // Ei vaaraa
   else return null;
 };
@@ -110,12 +122,18 @@ export const calculateNextMove = async (
   let mark = is_players_turn ? 'X' : 'O';
 
   let winning_index = await findWinningIndex(board, mark);
-  let double_threat_index = await findDoubleWinThreat(board);
-
   if (winning_index) return winning_index;
-  else if (double_threat_index) return double_threat_index;
-  else {
-    let index: number = winning_index ?? double_threat_index ?? 8;
+
+  let double_threat_index = await findDoubleWinThreat(board);
+  if (double_threat_index) return double_threat_index;
+
+  if (
+    !winning_index &&
+    winning_index !== 0 &&
+    !double_threat_index &&
+    double_threat_index !== 0
+  ) {
+    let index: number = 8;
 
     if (!board[4]) {
       index = 4;
@@ -126,5 +144,7 @@ export const calculateNextMove = async (
     }
 
     return index;
+  } else {
+    return 0;
   }
 };
