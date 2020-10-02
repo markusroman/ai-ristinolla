@@ -16,7 +16,7 @@ const App: React.FC<Props> = () => {
   const is_board_full = useRecoilValue(isBoardFull);
   const { resetGame, updateBoard } = useBoard();
   return (
-    <div className='App'>
+    <div id='app' className='App'>
       <Game updateBoard={updateBoard} />
       {is_game_won || is_board_full ? (
         <NewGame resetGame={resetGame} />

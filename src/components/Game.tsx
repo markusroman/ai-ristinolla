@@ -15,7 +15,7 @@ const Game: React.FC<Props> = ({ updateBoard }) => {
   };
 
   return (
-    <div className='Board'>
+    <div id='board' className='Board'>
       {gameboard.map((item, index) => (
         <Tile key={index} item={item} clicked={handleClick} index={index} />
       ))}

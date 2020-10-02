@@ -1,20 +1,20 @@
 {
-  "name": "ai-ristinolla-cra",
+  "name": "ai-ristinolla",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.57",
-    "@types/react": "^16.9.49",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.4",
+    "@testing-library/user-event": "^12.1.6",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^12.12.62",
+    "@types/react": "^16.9.50",
     "@types/react-dom": "^16.9.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
-    "recoil": "0.0.10",
-    "typescript": "^3.7.5"
+    "recoil": "0.0.13",
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -36,8 +36,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/recoil": "0.0.1"
   }
 }

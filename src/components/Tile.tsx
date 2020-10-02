@@ -23,7 +23,12 @@ const Tile: React.FC<Props> = ({ item, index, clicked }) => {
   };
 
   return (
-    <div className='Tile' onClick={handleClick}>
+    <div
+      data-testid={`tile-${index}-value-${item}`}
+      id={`tile-${index}-value-${item}`}
+      className='Tile'
+      onClick={handleClick}
+    >
       {item}
     </div>
   );
