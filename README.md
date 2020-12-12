@@ -7,7 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
         <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white&style=for-the-badge" />
     </a>
     <a href="https://www.npmjs.com/">
-        <img alt="NPM" src="https://img.shields.io/badge/NPM-CB3837?logo=react&logoColor=white&style=for-the-badge" />
+        <img alt="NPM" src="https://img.shields.io/badge/NPM-CB3837?logo=npm&logoColor=white&style=for-the-badge" />
     </a>
     <a href="https://reactjs.org/">
         <img alt="React" src="https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=for-the-badge" />
@@ -22,6 +22,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
         <img alt="CSS" src="https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white&style=for-the-badge" />
     </a>
 </div>
+
+---
 
 This repository is a simple tic-tac-toe against a simulated opponent. The game is supposed to be impossible to win.
 
