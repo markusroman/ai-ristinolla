@@ -2,9 +2,9 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { snapshot_UNSTABLE, RecoilRoot } from 'recoil';
 import App from './App';
-import { board } from './store';
+import { board, isBoardFull, isGameWon, isPlayersTurn } from './store';
 
-const EMPTY_BOARD = [null, null, null, null, null, null, null, null, null];
+const EMPTY_BOARD: (string | null)[] = Array(9).fill(null);
 
 beforeEach(() => {
   render(
@@ -17,17 +17,17 @@ beforeEach(() => {
 });
 
 it('renders the app correctly', () => {
-  const app = document.getElementById('app');
-  expect(app).not.toBeNull();
-  const turn_label = document.getElementById('turn-label');
-  expect(turn_label).not.toBeNull();
-  const board = document.getElementById('board');
-  expect(board).not.toBeNull();
+  expect(document.getElementById('app')).not.toBeNull();
+  expect(document.getElementById('turn-label')).not.toBeNull();
+  expect(document.getElementById('board')).not.toBeNull();
 });
 
-it('rendered board is empty', () => {
+it('initial game state is correct', () => {
   const initialSnapshot = snapshot_UNSTABLE();
   expect(initialSnapshot.getLoadable(board).valueOrThrow()).toEqual(
     EMPTY_BOARD
   );
+  expect(initialSnapshot.getLoadable(isBoardFull).valueOrThrow()).toBe(false);
+  expect(initialSnapshot.getLoadable(isGameWon).valueOrThrow()).toBe(false);
+  expect(initialSnapshot.getLoadable(isPlayersTurn).valueOrThrow()).toBe(true);
 });
