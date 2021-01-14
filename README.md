@@ -34,6 +34,7 @@ If you want to play it locally, follow these steps:
 - Move to the created directory
 - Install the packages with "npm install"
 - Run the program with "npm start"
-  This doesn't work, if you don't have node and git installed!
+  
+**This doesn't work, if you don't have node and git installed!**
 
 #### You can also try the game directly in a browser, [HERE](https://ai-ristinolla.netlify.app/)!
