@@ -30,10 +30,10 @@ This repository is a simple tic-tac-toe against a simulated opponent. The game i
 If you want to play it locally, follow these steps:
 
 - Open a terminal
-- Clone the repository with "git clone"
-- Move to the created directory
-- Install the packages with "npm install"
-- Run the program with "npm start"
+- Clone the repository with `git clone https://github.com/markusroman/ai-ristinolla.git`
+- Move to the created directory `cd ai-ristinolla`
+- Install the packages with `npm install`
+- Run the program with `npm start`
   
 **This doesn't work, if you don't have node and git installed!**
 
